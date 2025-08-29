@@ -1,0 +1,6 @@
+{
+  "name": "Agente Asistente",
+  "provider": "openai",
+  "autonomy": "0.8",
+  "systemPrompt": "Eres un asistente útil y amigable que puede buscar información y generar memes. Ayuda a los usuarios de manera efectiva."
+}

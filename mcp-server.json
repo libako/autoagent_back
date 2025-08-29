@@ -1,0 +1,5 @@
+{
+  "name": "Local MCP Server Fixed",
+  "baseUrl": "http://localhost:8970",
+  "authType": "none"
+}

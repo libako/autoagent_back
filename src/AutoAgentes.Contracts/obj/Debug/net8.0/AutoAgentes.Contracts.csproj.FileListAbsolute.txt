@@ -1,0 +1,15 @@
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\bin\Debug\net8.0\AutoAgentes.Contracts.deps.json
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\bin\Debug\net8.0\AutoAgentes.Contracts.dll
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\bin\Debug\net8.0\AutoAgentes.Contracts.pdb
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\AutoAgentes.Contracts.csproj.AssemblyReference.cache
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\AutoAgentes.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\AutoAgentes.Contracts.AssemblyInfoInputs.cache
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\AutoAgentes.Contracts.AssemblyInfo.cs
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\AutoAgentes.Contracts.csproj.CoreCompileInputs.cache
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\AutoAgentes.Contracts.dll
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\refint\AutoAgentes.Contracts.dll
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\AutoAgentes.Contracts.pdb
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\ref\AutoAgentes.Contracts.dll
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\bin\Debug\net8.0\AutoAgentes.Domain.dll
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\bin\Debug\net8.0\AutoAgentes.Domain.pdb
+C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Contracts\obj\Debug\net8.0\AutoAgen.58AE8913.Up2Date

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "XX2zLNDStEk=",
+  "success": true,
+  "projectFilePath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Contracts\\AutoAgentes.Contracts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DiegoÁlvarezAllas\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
