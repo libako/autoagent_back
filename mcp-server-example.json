@@ -1,0 +1,8 @@
+{
+  "name": "Ejemplo Servidor MCP",
+  "baseUrl": "http://localhost:8970",
+  "authType": "none",
+  "description": "Servidor MCP de ejemplo que acepta llamadas JSON-RPC 2.0"
+}
+
+

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj": {}
+    "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj": {
+    "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj",
+        "projectUniqueName": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj",
         "projectName": "AutoAgentes.Domain",
-        "projectPath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj",
-        "packagesPath": "C:\\Users\\DiegoÁlvarezAllas\\.nuget\\packages\\",
-        "outputPath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Domain\\obj\\",
+        "projectPath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\DiegoÁlvarezAllas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,8 +39,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -65,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

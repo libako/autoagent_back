@@ -1,11 +1,18 @@
 namespace AutoAgentes.Contracts;
 
-public interface ITraceEmitter
+public interface ITraceEmitter : IDisposable
 {
     Task EmitAsync(Guid sessionId, TraceEvent evt, CancellationToken ct);
 }
 
-public record TraceEvent(string Kind, object Payload, DateTimeOffset At);
+public record TraceEvent(string Kind, object Payload, DateTimeOffset At, string Id = "", int? Idx = null)
+{
+    public string Id { get; init; } = string.IsNullOrEmpty(Id) ? Guid.NewGuid().ToString() : Id;
+    public string Kind { get; init; } = Kind;
+    public object Payload { get; init; } = Payload;
+    public DateTimeOffset At { get; init; } = At;
+    public int? Idx { get; init; } = Idx;
+}
 
 public interface IMcpCaller
 {
@@ -19,7 +26,7 @@ public interface IOrchestrator
 
 public interface IMcpRegistry
 {
-    Task<IReadOnlyList<(Guid ToolId, Guid McpServerId, string ServerName, string Name, string? Description)>> ListBoundToolsAsync(Guid agentId, CancellationToken ct);
+    Task<IReadOnlyList<(Guid ToolId, Guid McpServerId, string ServerName, string Name, string? Description, string? InputSchemaJson, string? Scope)>> ListBoundToolsAsync(Guid agentId, CancellationToken ct);
     Task<IReadOnlyList<McpServerResponse>> GetServersAsync();
 }
 

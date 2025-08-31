@@ -1,0 +1,74 @@
+### Prueba Directa del Servidor MCP
+
+### 1. Probar el servidor MCP directamente (sin nuestra API)
+POST http://localhost:8970
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-1",
+  "method": "tools/list",
+  "params": {}
+}
+
+### 2. Probar con método diferente
+POST http://localhost:8970
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-2",
+  "method": "tools/list",
+  "params": {}
+}
+
+### 3. Probar con método initialize
+POST http://localhost:8970
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-3",
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {},
+    "clientInfo": {
+      "name": "TestClient",
+      "version": "1.0.0"
+    }
+  }
+}
+
+### 4. Probar con método vacío (para ver el error)
+POST http://localhost:8970
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-4",
+  "method": "",
+  "params": {}
+}
+
+### 5. Verificar si el servidor responde
+GET http://localhost:8970/health
+
+### 6. Probar con diferentes endpoints
+POST http://localhost:8970/
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-5",
+  "method": "tools/list",
+  "params": {}
+}
+
+### 7. Probar con WebSocket upgrade
+GET http://localhost:8970/ws
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Sec-WebSocket-Version: 13
+

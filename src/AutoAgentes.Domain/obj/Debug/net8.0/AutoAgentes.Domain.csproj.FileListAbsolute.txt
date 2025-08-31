@@ -9,3 +9,15 @@ C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.
 C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Domain\obj\Debug\net8.0\refint\AutoAgentes.Domain.dll
 C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.Domain.pdb
 C:\Tokiota\PoCs\AutoAgentes\src\AutoAgentes.Domain\obj\Debug\net8.0\ref\AutoAgentes.Domain.dll
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\bin\Debug\net8.0\AutoAgentes.Domain.deps.json
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\bin\Debug\net8.0\AutoAgentes.Domain.dll
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\bin\Debug\net8.0\AutoAgentes.Domain.pdb
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.Domain.AssemblyInfoInputs.cache
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.Domain.AssemblyInfo.cs
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.Domain.csproj.CoreCompileInputs.cache
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.Domain.sourcelink.json
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.Domain.dll
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\refint\AutoAgentes.Domain.dll
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\AutoAgentes.Domain.pdb
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Domain\obj\Debug\net8.0\ref\AutoAgentes.Domain.dll

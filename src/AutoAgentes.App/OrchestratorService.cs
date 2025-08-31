@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text.Json;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using AutoAgentes.Contracts;
@@ -132,18 +133,31 @@ Responde directamente al usuario, no hagas un resumen de lo que hiciste.";
     {
         try
         {
+            Console.WriteLine($"=== EJECUTANDO HERRAMIENTA MCP ===");
+            Console.WriteLine($"Agent ID: {agentId}");
+            Console.WriteLine($"Function Name: {functionName}");
+            Console.WriteLine($"User Message: {userMessage}");
+            
             // Obtener las herramientas vinculadas al agente
             var boundTools = await _mcpRegistry.ListBoundToolsAsync(agentId, ct);
+            Console.WriteLine($"Herramientas vinculadas encontradas: {boundTools.Count}");
             
             // Buscar la herramienta por nombre sanitizado
             var sanitizedFunctionName = SanitizeFunctionName(functionName);
+            Console.WriteLine($"Nombre sanitizado: {sanitizedFunctionName}");
+            
             var tool = boundTools.FirstOrDefault(t => 
                 SanitizeFunctionName(t.Name).Equals(sanitizedFunctionName, StringComparison.OrdinalIgnoreCase));
             
             if (tool == default)
             {
+                Console.WriteLine($"Herramienta '{functionName}' no encontrada para el agente");
                 return $"Herramienta '{functionName}' no encontrada para el agente";
             }
+            
+            Console.WriteLine($"Herramienta encontrada: {tool.Name} en servidor {tool.McpServerId}");
+            Console.WriteLine($"Input Schema JSON: {tool.InputSchemaJson}");
+            Console.WriteLine($"Input Schema es null/empty: {string.IsNullOrEmpty(tool.InputSchemaJson)}");
             
             // Emitir evento de ejecución de herramienta MCP
             await Emit(Guid.Empty, "mcp_tool_execution", new { 
@@ -155,22 +169,35 @@ Responde directamente al usuario, no hagas un resumen de lo que hiciste.";
             // Llamar al servidor MCP real
             var mcpCaller = _serviceProvider.GetRequiredService<IMcpCaller>();
             
-            // Crear argumentos para la herramienta MCP
-            var args = new Dictionary<string, object>
-            {
-                ["prompt"] = userMessage
-            };
+            // Crear argumentos para la herramienta MCP usando el LLM para que sea completamente dinámico
+            var args = await BuildArgumentsFromSchemaWithLLMAsync(tool.InputSchemaJson, userMessage, tool.Name, tool.Description, ct);
             
             // Convertir argumentos a JSON
             var argsJson = System.Text.Json.JsonSerializer.Serialize(args);
+            Console.WriteLine($"Argumentos JSON: {argsJson}");
+            
+            // Construir el nombre completo de la herramienta (namespace.tool)
+            var fullToolName = $"{tool.Scope}.{tool.Name}";
+            Console.WriteLine($"Nombre completo de herramienta: {fullToolName}");
+            Console.WriteLine($"Llamando a mcpCaller.CallAsync con serverId={tool.McpServerId}, toolName={fullToolName}");
             
             // Llamar a la herramienta MCP
-            var result = await mcpCaller.CallAsync(tool.McpServerId, tool.Name, argsJson, ct);
+            var result = await mcpCaller.CallAsync(tool.McpServerId, fullToolName, argsJson, ct);
             
-            return result ?? "No se recibió respuesta del servidor MCP";
+            Console.WriteLine($"Resultado recibido: {result}");
+            Console.WriteLine($"=== HERRAMIENTA MCP EJECUTADA EXITOSAMENTE ===");
+            
+            // Procesar la respuesta usando el modelo LLM para que sea completamente dinámico
+            var processedResult = await ProcessMcpResponseWithLLMAsync(tool.Name, result, tool.InputSchemaJson, tool.Description, userMessage, ct);
+            
+            return processedResult ?? "No se recibió respuesta del servidor MCP";
         }
         catch (Exception ex)
         {
+            Console.WriteLine($"=== ERROR EN EJECUCIÓN MCP ===");
+            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine($"Stack trace: {ex.StackTrace}");
+            Console.WriteLine($"=== FIN ERROR MCP ===");
             return $"Error ejecutando herramienta MCP: {ex.Message}";
         }
     }
@@ -203,4 +230,156 @@ Responde directamente al usuario, no hagas un resumen de lo que hiciste.";
 
     private Task Emit(Guid sessionId, string kind, object payload, CancellationToken ct)
         => _emitter.EmitAsync(sessionId, new TraceEvent(kind, payload, DateTimeOffset.UtcNow), ct);
+
+    private async Task<Dictionary<string, object>> BuildArgumentsFromSchemaWithLLMAsync(string? inputSchemaJson, string userMessage, string toolName, string? toolDescription, CancellationToken ct)
+    {
+        var args = new Dictionary<string, object>();
+        
+        if (string.IsNullOrEmpty(inputSchemaJson))
+        {
+            // Si no hay esquema, usar el genérico
+            args["prompt"] = userMessage;
+            return args;
+        }
+
+        try
+        {
+            Console.WriteLine($"Construyendo argumentos con LLM para herramienta: {toolName}");
+            Console.WriteLine($"Esquema JSON: {inputSchemaJson}");
+            
+            // Crear un prompt inteligente para que el LLM construya los argumentos
+            var prompt = $@"Eres un experto en construir argumentos para herramientas MCP basándote en su esquema JSON.
+
+**Herramienta:** {toolName}
+**Descripción:** {toolDescription ?? "Sin descripción"}
+**Mensaje del usuario:** {userMessage}
+
+**Esquema JSON de la herramienta:**
+{inputSchemaJson}
+
+**Instrucciones:**
+1. Analiza el esquema JSON de la herramienta
+2. Identifica las propiedades requeridas (required)
+3. Para cada propiedad requerida, sugiere un valor apropiado basándote en:
+   - El mensaje del usuario
+   - El tipo de dato esperado
+   - El contexto de la herramienta
+   - Valores por defecto sensatos
+4. Devuelve SOLO un JSON válido con los argumentos, sin explicaciones adicionales
+
+**Formato de respuesta esperado:**
+{{
+  ""propiedad1"": ""valor1"",
+  ""propiedad2"": ""valor2""
+}}
+
+**Ejemplo:**
+Si el esquema requiere ""topText"" y ""template"", y el usuario dice ""hazme un meme de gatos"", podrías devolver:
+{{
+  ""topText"": ""hazme un meme de gatos"",
+  ""template"": ""random""
+}}
+
+**Argumentos construidos:**";
+
+            // Usar el kernel para construir argumentos con el LLM
+            var kernel = await _kernelFactory.CreateAsync(new AutoAgentes.Domain.Entities.Agent 
+            { 
+                Id = Guid.Empty, 
+                Name = "ArgumentBuilder",
+                Provider = "openai",
+                Autonomy = "Supervised"
+            }, Guid.Empty, ct);
+            
+            var chat = kernel.GetRequiredService<IChatCompletionService>();
+            
+            var llmResponse = await chat.GetChatMessageContentAsync(
+                chatHistory: new ChatHistory(prompt),
+                executionSettings: null,
+                kernel: kernel,
+                cancellationToken: ct);
+
+            var responseContent = llmResponse.Content ?? "{}";
+            Console.WriteLine($"Respuesta del LLM para argumentos: {responseContent}");
+
+            // Intentar parsear la respuesta JSON del LLM
+            try
+            {
+                var parsedArgs = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(responseContent);
+                if (parsedArgs != null)
+                {
+                    args = parsedArgs;
+                    Console.WriteLine($"Argumentos construidos por LLM: {string.Join(", ", args.Select(kvp => $"{kvp.Key}={kvp.Value}"))}");
+                }
+            }
+            catch (Exception parseEx)
+            {
+                Console.WriteLine($"Error parseando respuesta JSON del LLM: {parseEx.Message}");
+                // Fallback: usar el esquema genérico
+                args["prompt"] = userMessage;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error construyendo argumentos con LLM: {ex.Message}");
+            // Fallback al esquema genérico
+            args["prompt"] = userMessage;
+        }
+        
+        return args;
+    }
+
+    private async Task<string> ProcessMcpResponseWithLLMAsync(string toolName, string? response, string? inputSchemaJson, string? toolDescription, string userMessage, CancellationToken ct)
+    {
+        if (string.IsNullOrEmpty(response))
+            return "No se recibió respuesta del servidor MCP";
+
+        try
+        {
+            // Crear un prompt inteligente para que el LLM procese la respuesta
+            var prompt = $@"Eres un asistente experto en procesar respuestas de herramientas MCP.
+
+**Herramienta:** {toolName}
+**Descripción:** {toolDescription ?? "Sin descripción"}
+**Mensaje del usuario:** {userMessage}
+
+**Respuesta de la herramienta MCP:**
+{response}
+
+**Instrucciones:**
+1. Analiza la respuesta de la herramienta MCP
+2. Extrae la información más relevante y útil
+3. Formatea la respuesta de manera clara y natural
+4. Responde directamente al usuario, no hagas un resumen técnico
+5. Si hay URLs, imágenes, o contenido especial, inclúyelo de manera útil
+6. Mantén el contexto de lo que pidió el usuario
+
+**Respuesta procesada:**";
+
+            // Usar el kernel para procesar con el LLM
+            var kernel = await _kernelFactory.CreateAsync(new AutoAgentes.Domain.Entities.Agent 
+            { 
+                Id = Guid.Empty, 
+                Name = "ResponseProcessor",
+                Provider = "openai",
+                Autonomy = "Supervised"
+            }, Guid.Empty, ct);
+            
+            var chat = kernel.GetRequiredService<IChatCompletionService>();
+            
+            var llmResponse = await chat.GetChatMessageContentAsync(
+                chatHistory: new ChatHistory(prompt),
+                executionSettings: null,
+                kernel: kernel,
+                cancellationToken: ct);
+
+            return llmResponse.Content ?? "Error procesando la respuesta con el LLM";
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error procesando respuesta MCP con LLM: {ex.Message}");
+            // Fallback: devolver la respuesta tal como está
+            return response;
+        }
+    }
 }

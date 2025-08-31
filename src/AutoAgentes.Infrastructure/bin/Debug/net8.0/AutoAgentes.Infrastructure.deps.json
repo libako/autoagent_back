@@ -1838,18 +1838,12 @@
           "FluentValidation": "12.0.0"
         },
         "runtime": {
-          "AutoAgentes.Contracts.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "AutoAgentes.Contracts.dll": {}
         }
       },
       "AutoAgentes.Domain/1.0.0": {
         "runtime": {
-          "AutoAgentes.Domain.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "AutoAgentes.Domain.dll": {}
         }
       }
     }

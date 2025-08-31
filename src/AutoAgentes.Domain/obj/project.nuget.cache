@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NIH6ofj47e4=",
+  "dgSpecHash": "T2vkaQU4qEiG+WtG2XaMgkvL/p6+qre/qgOnxlYIHczw80/ybOA/Qd/f2Zuq47SksBx75TOFm3Zk+HIxGyGfQg==",
   "success": true,
-  "projectFilePath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj",
+  "projectFilePath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

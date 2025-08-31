@@ -2379,10 +2379,7 @@
           "Microsoft.SemanticKernel.Connectors.AzureOpenAI": "1.64.0"
         },
         "runtime": {
-          "AutoAgentes.App.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "AutoAgentes.App.dll": {}
         }
       },
       "AutoAgentes.Contracts/1.0.0": {
@@ -2391,18 +2388,12 @@
           "FluentValidation": "12.0.0"
         },
         "runtime": {
-          "AutoAgentes.Contracts.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "AutoAgentes.Contracts.dll": {}
         }
       },
       "AutoAgentes.Domain/1.0.0": {
         "runtime": {
-          "AutoAgentes.Domain.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "AutoAgentes.Domain.dll": {}
         }
       },
       "AutoAgentes.Infrastructure/1.0.0": {
@@ -2418,10 +2409,7 @@
           "Polly.Extensions.Http": "3.0.0"
         },
         "runtime": {
-          "AutoAgentes.Infrastructure.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "AutoAgentes.Infrastructure.dll": {}
         }
       }
     }

@@ -1,7 +1,9 @@
 using AutoAgentes.Contracts;
 using AutoAgentes.App;
 using AutoAgentes.Infrastructure.Services;
+using AutoAgentes.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoAgentes.Api;
 
@@ -25,6 +27,20 @@ public static class Endpoints
             var tools = await registry.DiscoverToolsAsync(id);
             return Results.Ok(tools);
         });
+        
+        mcp.MapPost("/servers/{id:guid}/refresh", async (Guid id, IMcpServerRegistry registry) =>
+        {
+            try
+            {
+                var tools = await registry.DiscoverToolsAsync(id);
+                return Results.Ok(new { message = "Herramientas refrescadas exitosamente", tools });
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem($"Error refrescando herramientas: {ex.Message}");
+            }
+        });
+
         mcp.MapGet("/tools", async ([FromQuery] Guid? serverId, IMcpServerRegistry registry) =>
         {
             if (!serverId.HasValue)
@@ -34,35 +50,21 @@ public static class Endpoints
             return Results.Ok(tools.Tools);
         });
         
-        mcp.MapGet("/tools/all", async (IMcpServerRegistry registry) =>
+        mcp.MapGet("/tools/all", async (AppDbContext context) =>
         {
-            var allTools = new List<object>();
-            var servers = await registry.GetServersAsync();
-            
-            foreach (var server in servers)
-            {
-                try
+            var allTools = await context.Tools
+                .Include(t => t.McpServer)
+                .Select(t => new
                 {
-                    var tools = await registry.DiscoverToolsAsync(server.Id);
-                    foreach (var tool in tools.Tools)
-                    {
-                        allTools.Add(new
-                        {
-                            tool.Id,
-                            tool.Name,
-                            tool.Description,
-                            tool.Scope,
-                            tool.InputSchemaJson,
-                            ServerId = server.Id,
-                            ServerName = server.Name
-                        });
-                    }
-                }
-                catch
-                {
-                    // Ignorar servidores que no responden
-                }
-            }
+                    t.Id,
+                    t.Name,
+                    t.Description,
+                    t.Scope,
+                    t.InputSchemaJson,
+                    ServerId = t.McpServerId,
+                    ServerName = t.McpServer!.Name
+                })
+                .ToListAsync();
             
             return Results.Ok(allTools);
         });

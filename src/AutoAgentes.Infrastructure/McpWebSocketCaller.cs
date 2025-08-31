@@ -47,12 +47,25 @@ public class McpWebSocketCaller : IMcpCaller
         {
             return await CallWithStandardWebSocket(wsUrl, toolName, argsJson, ct);
         }
-        catch (Exception ex) when (ex.Message.Contains("400") || ex.Message.Contains("101"))
+        catch (Exception ex) when (ex.Message.Contains("400") || ex.Message.Contains("101") || ex.Message.Contains("WebSocket"))
         {
             _log.LogWarning("WebSocket estándar falló, intentando con HTTP upgrade manual: {Error}", ex.Message);
             
             // Si falla, intentar con HTTP upgrade manual
-            return await CallWithHttpUpgrade(server.BaseUrl, toolName, argsJson, ct);
+            try
+            {
+                return await CallWithHttpUpgrade(server.BaseUrl, toolName, argsJson, ct);
+            }
+            catch (Exception httpEx)
+            {
+                _log.LogError("HTTP upgrade también falló: {Error}", httpEx.Message);
+                throw new InvalidOperationException($"Tanto WebSocket como HTTP fallaron. WebSocket: {ex.Message}, HTTP: {httpEx.Message}");
+            }
+        }
+        catch (Exception ex)
+        {
+            _log.LogError("Error inesperado en WebSocket: {Error}", ex.Message);
+            throw;
         }
     }
 
@@ -66,7 +79,7 @@ public class McpWebSocketCaller : IMcpCaller
             // Paso 1: Enviar mensaje de inicialización MCP
             var initMessage = new
             {
-                jsonrpc = "2.0",
+                Jsonrpc = "2.0",
                 id = 1,
                 method = "initialize",
                 @params = new
@@ -88,7 +101,7 @@ public class McpWebSocketCaller : IMcpCaller
 
             // Verificar que la inicialización fue exitosa
             var initJson = JsonSerializer.Deserialize<JsonElement>(initResponse);
-            if (initJson.TryGetProperty("error", out var initError))
+            if (initJson.TryGetProperty("error", out var initError) && initError.ValueKind != JsonValueKind.Null)
             {
                 var errorMessage = initError.TryGetProperty("message", out var msgElement) 
                     ? msgElement.GetString() 
@@ -97,15 +110,15 @@ public class McpWebSocketCaller : IMcpCaller
             }
 
             // Paso 2: Enviar notificación de inicialización completada
-            var initializedMessage = new
+            /*var initializedMessage = new
             {
-                jsonrpc = "2.0",
+                Jsonrpc = "2.0",
                 method = "notifications/initialized",
                 @params = new { }
             };
 
             await SendMessageAsync(client, initializedMessage, ct);
-            _log.LogDebug("Sent initialized notification");
+            _log.LogDebug("Sent initialized notification");*/
 
             // Esperar un poco para que el servidor procese la notificación
             await Task.Delay(100, ct);
@@ -114,7 +127,7 @@ public class McpWebSocketCaller : IMcpCaller
             var callId = 2; // ID único para la llamada
             var callMessage = new
             {
-                jsonrpc = "2.0",
+                Jsonrpc = "2.0",
                 id = callId,
                 method = "tools/call",
                 @params = new
@@ -146,7 +159,7 @@ public class McpWebSocketCaller : IMcpCaller
                     
                     // Si es la respuesta a nuestra llamada
                     if (responseJson.TryGetProperty("id", out var idElement) && 
-                        idElement.GetInt32() == callId)
+                        GetIdAsInt32(idElement) == callId)
                     {
                         callResponse = response;
                         break;
@@ -169,7 +182,7 @@ public class McpWebSocketCaller : IMcpCaller
             // Parsear la respuesta
             var resultJson = JsonSerializer.Deserialize<JsonElement>(callResponse);
             
-            if (resultJson.TryGetProperty("error", out var errorElement))
+            if (resultJson.TryGetProperty("error", out var errorElement) && errorElement.ValueKind != JsonValueKind.Null)
             {
                 var errorMessage = errorElement.TryGetProperty("message", out var msgElement) 
                     ? msgElement.GetString() 
@@ -221,7 +234,7 @@ public class McpWebSocketCaller : IMcpCaller
                     // Enviar mensaje MCP por el stream
                     var mcpMessage = new
                     {
-                        jsonrpc = "2.0",
+                        Jsonrpc = "2.0",
                         id = 1,
                         method = "tools/call",
                         @params = new
@@ -280,5 +293,15 @@ public class McpWebSocketCaller : IMcpCaller
         var message = messageBuilder.ToString();
         _log.LogDebug("Received MCP message: {Message}", message);
         return message;
+    }
+
+    private int GetIdAsInt32(JsonElement idElement)
+    {
+        return idElement.ValueKind switch
+        {
+            JsonValueKind.String => int.TryParse(idElement.GetString(), out var result) ? result : -1,
+            JsonValueKind.Number => idElement.GetInt32(),
+            _ => -1
+        };
     }
 }

@@ -1,0 +1,48 @@
+### Debug del Descubrimiento MCP
+
+@baseUrl = http://localhost:5085
+@apiKey = dev-key-1
+
+### 1. Verificar que el servidor esté funcionando
+GET {{baseUrl}}/health/live
+
+### 2. Crear un servidor MCP simple
+# @name createServer
+POST {{baseUrl}}/mcp/servers
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Debug MCP Server",
+  "baseUrl": "http://localhost:8970",
+  "authType": "none"
+}
+
+### 3. Verificar que se creó el servidor
+GET {{baseUrl}}/mcp/servers
+x-api-key: {{apiKey}}
+
+### 4. Intentar descubrimiento HTTP directo al servidor MCP
+POST http://localhost:8970
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-1",
+  "method": "tools/list",
+  "params": {}
+}
+
+### 5. Intentar descubrimiento a través de nuestra API
+# @name discoverTools
+POST {{baseUrl}}/mcp/servers/{{createServer.response.body.id}}/discover
+x-api-key: {{apiKey}}
+
+### 6. Verificar respuesta del descubrimiento
+GET {{baseUrl}}/mcp/tools?serverId={{createServer.response.body.id}}
+x-api-key: {{apiKey}}
+
+### 7. Verificar todas las herramientas
+GET {{baseUrl}}/mcp/tools/all
+x-api-key: {{apiKey}}
+

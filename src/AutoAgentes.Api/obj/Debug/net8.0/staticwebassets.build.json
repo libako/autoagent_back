@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"G9s4R2rKWRs3fTBqBOuI9FbeN5f+8m6W2hxwJ5mfFx0=","Source":"AutoAgentes.Api","BasePath":"_content/AutoAgentes.Api","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "SA3Vs8H8RajPLqXMto5c8Kr1/Xnb9fFfVDEyQ4jlh9g=",
+  "Source": "AutoAgentes.Api",
+  "BasePath": "_content/AutoAgentes.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

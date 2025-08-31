@@ -1,0 +1,97 @@
+### Pruebas del Flujo MCP Completo
+
+### Variables de Entorno
+@baseUrl = http://localhost:5088
+@apiKey = dev-key-1
+
+### 1. Crear Servidor MCP
+# @name createServer
+POST {{baseUrl}}/mcp/servers
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Test MCP Server",
+  "baseUrl": "http://localhost:8970",
+  "authType": "none"
+}
+
+### 2. Obtener Servidores
+GET {{baseUrl}}/mcp/servers
+x-api-key: {{apiKey}}
+
+### 3. Descubrir Herramientas del Servidor
+# @name discoverTools
+POST {{baseUrl}}/mcp/servers/{{createServer.response.body.id}}/discover
+x-api-key: {{apiKey}}
+
+### 4. Refrescar Herramientas del Servidor
+POST {{baseUrl}}/mcp/servers/{{createServer.response.body.id}}/refresh
+x-api-key: {{apiKey}}
+
+### 5. Listar Herramientas del Servidor
+GET {{baseUrl}}/mcp/tools?serverId={{createServer.response.body.id}}
+x-api-key: {{apiKey}}
+
+### 6. Listar Todas las Herramientas
+GET {{baseUrl}}/mcp/tools/all
+x-api-key: {{apiKey}}
+
+### 7. Crear Agente
+# @name createAgent
+POST {{baseUrl}}/agents
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "name": "Test Agent",
+  "description": "Agente de prueba con herramientas MCP",
+  "systemPrompt": "Eres un asistente útil que puede usar herramientas MCP.",
+  "autonomy": "Supervised"
+}
+
+### 8. Obtener Agentes
+GET {{baseUrl}}/agents
+x-api-key: {{apiKey}}
+
+### 9. Vincular Herramienta al Agente
+POST {{baseUrl}}/agents/{{createAgent.response.body.id}}/bindings
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "toolId": "{{discoverTools.response.body.tools[0].id}}",
+  "config": null,
+  "enabled": true
+}
+
+### 10. Obtener Bindings del Agente
+GET {{baseUrl}}/agents/{{createAgent.response.body.id}}/bindings
+x-api-key: {{apiKey}}
+
+### 11. Crear Sesión
+# @name createSession
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "agentId": "{{createAgent.response.body.id}}",
+  "userId": "test-user"
+}
+
+### 12. Enviar Mensaje a la Sesión
+POST {{baseUrl}}/sessions/{{createSession.response.body.id}}/messages
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+  "content": "Hola, ¿puedes ayudarme con algo usando tus herramientas?"
+}
+
+### 13. Obtener Traza de la Sesión
+GET {{baseUrl}}/sessions/{{createSession.response.body.id}}/trace
+x-api-key: {{apiKey}}
+
+### 14. Verificar Estado del Servidor MCP
+GET http://localhost:8970/health

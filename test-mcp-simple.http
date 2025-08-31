@@ -1,0 +1,57 @@
+### Test Simple del Servidor MCP
+
+### 1. Verificar si el servidor responde a HTTP básico
+GET http://localhost:8970
+
+### 2. Probar con método simple
+POST http://localhost:8970
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-1",
+  "method": "ping",
+  "params": {}
+}
+
+### 3. Probar con método que sabemos que existe
+POST http://localhost:8970
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-2",
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {},
+    "clientInfo": {
+      "name": "TestClient",
+      "version": "1.0.0"
+    }
+  }
+}
+
+### 4. Verificar si hay algún endpoint específico
+GET http://localhost:8970/health
+GET http://localhost:8970/status
+GET http://localhost:8970/info
+
+### 5. Probar con diferentes versiones del protocolo
+POST http://localhost:8970
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "test-3",
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "1.0",
+    "capabilities": {},
+    "clientInfo": {
+      "name": "TestClient",
+      "version": "1.0.0"
+    }
+  }
+}
+

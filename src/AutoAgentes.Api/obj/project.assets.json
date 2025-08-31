@@ -11072,24 +11072,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DiegoÁlvarezAllas\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Api\\AutoAgentes.Api.csproj",
+      "projectUniqueName": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Api\\AutoAgentes.Api.csproj",
       "projectName": "AutoAgentes.Api",
-      "projectPath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Api\\AutoAgentes.Api.csproj",
-      "packagesPath": "C:\\Users\\DiegoÁlvarezAllas\\.nuget\\packages\\",
-      "outputPath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Api\\obj\\",
+      "projectPath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Api\\AutoAgentes.Api.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Api\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\DiegoÁlvarezAllas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11103,17 +11098,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.App\\AutoAgentes.App.csproj": {
-              "projectPath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.App\\AutoAgentes.App.csproj"
+            "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.App\\AutoAgentes.App.csproj": {
+              "projectPath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.App\\AutoAgentes.App.csproj"
             },
-            "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Contracts\\AutoAgentes.Contracts.csproj": {
-              "projectPath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Contracts\\AutoAgentes.Contracts.csproj"
+            "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Contracts\\AutoAgentes.Contracts.csproj": {
+              "projectPath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Contracts\\AutoAgentes.Contracts.csproj"
             },
-            "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj": {
-              "projectPath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj"
+            "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj": {
+              "projectPath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Domain\\AutoAgentes.Domain.csproj"
             },
-            "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Infrastructure\\AutoAgentes.Infrastructure.csproj": {
-              "projectPath": "C:\\Tokiota\\PoCs\\AutoAgentes\\src\\AutoAgentes.Infrastructure\\AutoAgentes.Infrastructure.csproj"
+            "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Infrastructure\\AutoAgentes.Infrastructure.csproj": {
+              "projectPath": "D:\\BearDevelopment\\AutoAgent\\autoagent_back\\src\\AutoAgentes.Infrastructure\\AutoAgentes.Infrastructure.csproj"
             }
           }
         }
@@ -11127,8 +11122,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -11192,7 +11186,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
