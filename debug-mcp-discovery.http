@@ -1,6 +1,6 @@
 ### Debug del Descubrimiento MCP
 
-@baseUrl = http://localhost:5085
+@baseUrl = http://localhost:5088
 @apiKey = dev-key-1
 
 ### 1. Verificar que el servidor esté funcionando

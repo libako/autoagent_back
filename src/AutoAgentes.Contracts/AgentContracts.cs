@@ -20,7 +20,8 @@ public record AgentResponse(
     string? Description,
     string SystemPrompt,
     string Autonomy,
-    DateTime CreatedAt
+    DateTime CreatedAt,
+    string Provider
 );
 
 public record CreateBindingRequest(Guid ToolId, object? Config, bool Enabled);

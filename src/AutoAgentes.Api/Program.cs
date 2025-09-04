@@ -10,8 +10,13 @@ using Serilog.Enrichers.Span;
 using AutoAgentes.Infrastructure;
 using AutoAgentes.Infrastructure.Services;
 using AutoAgentes.App;
+using AutoAgentes.App.Services;
 using AutoAgentes.Api;
 using AutoAgentes.Contracts;
+using ConversationStore = AutoAgentes.App.ConversationStore;
+using ContextBuilder = AutoAgentes.App.ContextBuilder;
+using LastKMessagesReducer = AutoAgentes.App.LastKMessagesReducer;
+using WhiteboardReducer = AutoAgentes.App.WhiteboardReducer;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
 using FluentValidation;
@@ -84,6 +89,14 @@ builder.Services.AddScoped<IKernelFactory, KernelFactory>();
 builder.Services.AddScoped<IPlanner, Planner>();
 builder.Services.AddScoped<IMcpCaller, McpWebSocketCaller>();
 builder.Services.AddScoped<IOrchestrator, OrchestratorService>();
+builder.Services.AddSingleton<IToolRegistryService, ToolRegistryService>();
+
+// Contexto Conversacional - Registro directo
+builder.Services.AddScoped<IConversationStore, ConversationStore>();
+builder.Services.AddScoped<IContextBuilder, ContextBuilder>();
+builder.Services.AddSingleton<IHistoryReducer, LastKMessagesReducer>();
+builder.Services.AddSingleton<IHistoryReducer, WhiteboardReducer>();
+builder.Services.AddSingleton<LastKMessagesReducer>();
 
 // Auth simple por API Key
 builder.Services.AddAuthentication("ApiKey")

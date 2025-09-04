@@ -8,6 +8,7 @@ public class Message
     public Guid SessionId { get; set; }
     public string Role { get; set; } = string.Empty; // user | assistant | system
     public string Content { get; set; } = string.Empty;
+    public string? Kind { get; set; } // observation | system | null para mensajes normales
     public DateTime CreatedUtc { get; set; }
     public string? TokenUsageJson { get; set; }
 

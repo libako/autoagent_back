@@ -116,16 +116,20 @@ public class SessionsService : ISessionsService
 
                 await _traceEmitter.EmitAsync(sessionId, new TraceEvent("agent_found", new { agentId = agent.Id, agentName = agent.Name }, DateTimeOffset.UtcNow), CancellationToken.None);
 
-                // Crear scope y ejecutar usando DI
+                // Crear scope y ejecutar usando DI con contexto conversacional
                 using var scope = _scopeFactory.CreateScope();
                 var orchestrator = scope.ServiceProvider.GetRequiredService<IOrchestrator>();
+                var conversationStore = scope.ServiceProvider.GetRequiredService<IConversationStore>();
                 await _traceEmitter.EmitAsync(sessionId, new TraceEvent("orchestrator_resolved", new { }, DateTimeOffset.UtcNow), CancellationToken.None);
+
+                // Guardar mensaje del usuario en el store de conversación
+                await conversationStore.AddAsync(sessionId, "user", request.Content, null, CancellationToken.None);
 
                 await orchestrator.RunAsync(sessionId, new AutoAgentes.Domain.Entities.Agent 
                 { 
                     Id = agent.Id, 
                     Name = agent.Name,
-                    Provider = "openai",
+                    Provider = agent.Provider,
                     Autonomy = agent.Autonomy,
                     ParamsJson = agent.SystemPrompt
                 }, request.Content, CancellationToken.None);

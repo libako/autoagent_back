@@ -23,8 +23,17 @@ namespace AutoAgentes.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool?>("AllowUnknownTools")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AllowedToolsCsv")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Autonomy")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("BlockedToolsCsv")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedUtc")
@@ -40,8 +49,26 @@ namespace AutoAgentes.Infrastructure.Migrations
                     b.Property<string>("ParamsJson")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("PlannerMaxSteps")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("PlannerMaxTokens")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PlannerStop")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("PlannerTemperature")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("PlannerTopP")
+                        .HasColumnType("REAL");
+
                     b.Property<string>("Provider")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SystemPrompt")
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Temperature")
@@ -170,6 +197,9 @@ namespace AutoAgentes.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Kind")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Role")

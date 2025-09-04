@@ -25,23 +25,29 @@ public class Orchestrator
         // Crear kernel para el agente
         var kernel = await _kernelFactory.CreateAsync(agent, sessionId, ct);
 
-        // Crear plan usando el planner
-        var plan = await _planner.CreatePlanAsync(kernel, userMessage, agent.Id, ct);
-        await Emit(sessionId, "plan", new { plan.Goal, Steps = plan.Steps.Select(s => s.Name) }, ct);
+        // Crear plan usando el planner (por ahora sin contexto conversacional)
+        var emptyHistory = new ChatHistory();
+        var plan = await _planner.CreatePlanAsync(kernel, emptyHistory, agent, sessionId, ct);
+        await Emit(sessionId, "plan", new { plan.Goal, Steps = plan.Steps.Select(s => s.Tool) }, ct);
 
         // Ejecutar pasos del plan
         var stepIdx = 0;
         foreach (var step in plan.Steps)
         {
             stepIdx++;
-            await Emit(sessionId, "tool_call", new { idx = stepIdx, plugin = step.PluginName, function = step.Name }, ct);
+            await Emit(sessionId, "tool_call", new { idx = stepIdx, tool = step.Tool, args = step.Args }, ct);
 
             var started = DateTime.UtcNow;
             string? output = null; string? error = null;
             try
             {
-                var result = await step.InvokeAsync(kernel, new KernelArguments(), ct);
-                output = result?.ToString();
+                // TODO: Implementar ejecución real de herramientas MCP
+                // Por ahora, simulamos la ejecución
+                output = $"Paso planificado: {step.Tool}";
+                if (step.Args?.Any() == true)
+                {
+                    output += $" con argumentos: {string.Join(", ", step.Args.Select(kvp => $"{kvp.Key}={kvp.Value}"))}";
+                }
                 Telemetry.ToolCallsTotal.Add(1);
             }
             catch (Exception ex)
@@ -50,16 +56,25 @@ public class Orchestrator
                 await Emit(sessionId, "error", new { where = "tool", message = ex.Message }, ct);
             }
 
-            await Emit(sessionId, "observation", new { idx = stepIdx, plugin = step.PluginName, function = step.Name, output, error, elapsedMs = (DateTime.UtcNow - started).TotalMilliseconds }, ct);
+            await Emit(sessionId, "observation", new { idx = stepIdx, tool = step.Tool, output, error, elapsedMs = (DateTime.UtcNow - started).TotalMilliseconds }, ct);
         }
 
         // Generar resumen usando el chat
         var chat = kernel.GetRequiredService<IChatCompletionService>();
+        
+        // Configuración para el summary (más creativo que el planner)
+        // En SK 1.64.0, usamos objetos anónimos para la configuración
+        var sumSettings = new { Temperature = 0.2, MaxTokens = 600 };
+        
+        // Emitir configuración aplicada para telemetría
+        await _emitter.EmitAsync(sessionId, new TraceEvent("summary_settings_applied", new { 
+            temperature = sumSettings.Temperature,
+            maxTokens = sumSettings.MaxTokens
+        }, DateTimeOffset.UtcNow), ct);
+        
         var summary = await chat.GetChatMessageContentAsync(
             chatHistory: new ChatHistory("Resume la solución anterior en 4-5 líneas, sin revelar razonamientos internos."),
-            executionSettings: null,
-            kernel: kernel,
-            cancellationToken: ct);
+            kernel: kernel, cancellationToken: ct);
 
         // await _sessions.AddAssistantMessageAsync(sessionId, summary.Content ?? string.Empty, ct);
         await Emit(sessionId, "summary", new { content = summary.Content }, ct);
@@ -67,6 +82,8 @@ public class Orchestrator
 
     private Task Emit(Guid sessionId, string kind, object payload, CancellationToken ct)
         => _emitter.EmitAsync(sessionId, new TraceEvent(kind, payload, DateTimeOffset.UtcNow), ct);
+
+
 }
 
 

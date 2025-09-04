@@ -42,6 +42,9 @@ public class McpCaller : IMcpCaller
         // Crear un cliente HTTP con la URL base del servidor MCP
         var client = _http.CreateClient();
         client.BaseAddress = new Uri(server.BaseUrl);
+        
+        // Configurar timeout consistente (30 segundos como en Kernel)
+        client.Timeout = TimeSpan.FromSeconds(30);
 
         var policy = HttpPolicyExtensions
             .HandleTransientHttpError()

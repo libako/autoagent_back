@@ -10116,3 +10116,254 @@ INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
 2025-08-31 21:43:34.758 +02:00 [INF] Writing value of type 'List`1' as Json.
 2025-08-31 21:43:34.763 +02:00 [INF] Executed endpoint 'HTTP: GET /mcp/tools/all'
 2025-08-31 21:43:34.767 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/mcp/tools/all - 200 null application/json; charset=utf-8 38.2383ms
+2025-08-31 21:43:57.689 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/agents - null null
+2025-08-31 21:43:57.702 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:43:57.709 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/agents - 204 null null 20.038ms
+2025-08-31 21:43:57.719 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5088/agents - application/json null
+2025-08-31 21:43:57.728 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:43:57.738 +02:00 [INF] Executing endpoint 'HTTP: GET /agents/'
+2025-08-31 21:43:57.767 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."Autonomy", "a"."CreatedUtc", "a"."GuardrailsJson", "a"."Name", "a"."ParamsJson", "a"."Provider", "a"."Temperature", "a"."TemplateRef", "a"."TokenBudget", "a"."ToolBudget", "a"."TopP", "a"."UpdatedUtc"
+FROM "Agents" AS "a"
+ORDER BY "a"."CreatedUtc"
+2025-08-31 21:43:57.780 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:43:57.797 +02:00 [INF] Writing value of type 'List`1' as Json.
+2025-08-31 21:43:57.817 +02:00 [INF] Executed endpoint 'HTTP: GET /agents/'
+2025-08-31 21:43:57.826 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/agents - 200 null application/json; charset=utf-8 107.2632ms
+2025-08-31 21:44:06.718 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/mcp/tools/all - null null
+2025-08-31 21:44:06.718 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/mcp/servers - null null
+2025-08-31 21:44:06.725 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:06.732 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:06.737 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/mcp/tools/all - 204 null null 19.4775ms
+2025-08-31 21:44:06.742 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/mcp/servers - 204 null null 24.1812ms
+2025-08-31 21:44:06.748 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5088/mcp/tools/all - application/json null
+2025-08-31 21:44:06.755 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5088/mcp/servers - application/json null
+2025-08-31 21:44:06.761 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:06.771 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:06.774 +02:00 [INF] Executing endpoint 'HTTP: GET /mcp/tools/all'
+2025-08-31 21:44:06.780 +02:00 [INF] Executing endpoint 'HTTP: GET /mcp/servers'
+2025-08-31 21:44:06.791 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Name", "t"."Description", "t"."Scope", "t"."InputSchemaJson", "t"."McpServerId" AS "ServerId", "m"."Name" AS "ServerName"
+FROM "Tools" AS "t"
+INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
+2025-08-31 21:44:06.795 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "McpServers" AS "m"
+ORDER BY "m"."LastSeenUtc"
+2025-08-31 21:44:06.799 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:44:06.805 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:44:06.809 +02:00 [INF] Writing value of type 'List`1' as Json.
+2025-08-31 21:44:06.814 +02:00 [INF] Writing value of type 'List`1' as Json.
+2025-08-31 21:44:06.821 +02:00 [INF] Executed endpoint 'HTTP: GET /mcp/tools/all'
+2025-08-31 21:44:06.827 +02:00 [INF] Executed endpoint 'HTTP: GET /mcp/servers'
+2025-08-31 21:44:06.833 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/mcp/tools/all - 200 null application/json; charset=utf-8 84.3493ms
+2025-08-31 21:44:06.838 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/mcp/servers - 200 null application/json; charset=utf-8 83.9659ms
+2025-08-31 21:44:10.980 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - null null
+2025-08-31 21:44:10.990 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:10.997 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 204 null null 17.1684ms
+2025-08-31 21:44:11.005 +02:00 [INF] Request starting HTTP/1.1 PATCH http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - application/json 23
+2025-08-31 21:44:11.012 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:11.018 +02:00 [INF] Executing endpoint 'HTTP: PATCH /agents/{id:guid}'
+2025-08-31 21:44:11.034 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."Autonomy", "a"."CreatedUtc", "a"."GuardrailsJson", "a"."Name", "a"."ParamsJson", "a"."Provider", "a"."Temperature", "a"."TemplateRef", "a"."TokenBudget", "a"."ToolBudget", "a"."TopP", "a"."UpdatedUtc"
+FROM "Agents" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+2025-08-31 21:44:11.065 +02:00 [INF] Executed DbCommand (13ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Agents" SET "UpdatedUtc" = @p0
+WHERE "Id" = @p1
+RETURNING 1;
+2025-08-31 21:44:11.092 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:44:11.101 +02:00 [INF] Writing value of type 'AgentResponse' as Json.
+2025-08-31 21:44:11.108 +02:00 [INF] Executed endpoint 'HTTP: PATCH /agents/{id:guid}'
+2025-08-31 21:44:11.114 +02:00 [INF] Request finished HTTP/1.1 PATCH http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 200 null application/json; charset=utf-8 109.5285ms
+2025-08-31 21:44:11.122 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - null null
+2025-08-31 21:44:11.128 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:11.133 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 204 null null 11.1886ms
+2025-08-31 21:44:11.142 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - application/json null
+2025-08-31 21:44:11.149 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:11.159 +02:00 [INF] Executing endpoint 'HTTP: GET /agents/{id:guid}'
+2025-08-31 21:44:11.173 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."Autonomy", "a"."CreatedUtc", "a"."GuardrailsJson", "a"."Name", "a"."ParamsJson", "a"."Provider", "a"."Temperature", "a"."TemplateRef", "a"."TokenBudget", "a"."ToolBudget", "a"."TopP", "a"."UpdatedUtc"
+FROM "Agents" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+2025-08-31 21:44:11.183 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:44:11.188 +02:00 [INF] Writing value of type 'AgentResponse' as Json.
+2025-08-31 21:44:11.195 +02:00 [INF] Executed endpoint 'HTTP: GET /agents/{id:guid}'
+2025-08-31 21:44:11.202 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 200 null application/json; charset=utf-8 60.032ms
+2025-08-31 21:44:28.989 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - null null
+2025-08-31 21:44:29.001 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:29.007 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 204 null null 18.2414ms
+2025-08-31 21:44:29.014 +02:00 [INF] Request starting HTTP/1.1 PATCH http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - application/json 593
+2025-08-31 21:44:29.022 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:29.032 +02:00 [INF] Executing endpoint 'HTTP: PATCH /agents/{id:guid}'
+2025-08-31 21:44:29.046 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."Autonomy", "a"."CreatedUtc", "a"."GuardrailsJson", "a"."Name", "a"."ParamsJson", "a"."Provider", "a"."Temperature", "a"."TemplateRef", "a"."TokenBudget", "a"."ToolBudget", "a"."TopP", "a"."UpdatedUtc"
+FROM "Agents" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+2025-08-31 21:44:29.069 +02:00 [INF] Executed DbCommand (12ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Agents" SET "UpdatedUtc" = @p0
+WHERE "Id" = @p1
+RETURNING 1;
+2025-08-31 21:44:29.088 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:44:29.095 +02:00 [INF] Writing value of type 'AgentResponse' as Json.
+2025-08-31 21:44:29.102 +02:00 [INF] Executed endpoint 'HTTP: PATCH /agents/{id:guid}'
+2025-08-31 21:44:29.110 +02:00 [INF] Request finished HTTP/1.1 PATCH http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 200 null application/json; charset=utf-8 96.4707ms
+2025-08-31 21:44:29.119 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - null null
+2025-08-31 21:44:29.126 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:29.134 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 204 null null 14.6626ms
+2025-08-31 21:44:29.144 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - application/json null
+2025-08-31 21:44:29.153 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:29.162 +02:00 [INF] Executing endpoint 'HTTP: GET /agents/{id:guid}'
+2025-08-31 21:44:29.173 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."Autonomy", "a"."CreatedUtc", "a"."GuardrailsJson", "a"."Name", "a"."ParamsJson", "a"."Provider", "a"."Temperature", "a"."TemplateRef", "a"."TokenBudget", "a"."ToolBudget", "a"."TopP", "a"."UpdatedUtc"
+FROM "Agents" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+2025-08-31 21:44:29.182 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:44:29.193 +02:00 [INF] Writing value of type 'AgentResponse' as Json.
+2025-08-31 21:44:29.202 +02:00 [INF] Executed endpoint 'HTTP: GET /agents/{id:guid}'
+2025-08-31 21:44:29.210 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 200 null application/json; charset=utf-8 66.7782ms
+2025-08-31 21:44:33.519 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - null null
+2025-08-31 21:44:33.521 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865/bindings - null null
+2025-08-31 21:44:33.525 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:33.530 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:33.535 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 204 null null 16.6479ms
+2025-08-31 21:44:33.540 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865/bindings - 204 null null 19.1628ms
+2025-08-31 21:44:33.546 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - application/json null
+2025-08-31 21:44:33.552 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865/bindings - application/json null
+2025-08-31 21:44:33.558 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:33.563 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:33.569 +02:00 [INF] Executing endpoint 'HTTP: GET /agents/{id:guid}'
+2025-08-31 21:44:33.575 +02:00 [INF] Executing endpoint 'HTTP: GET /agents/{id:guid}/bindings'
+2025-08-31 21:44:33.583 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."Autonomy", "a"."CreatedUtc", "a"."GuardrailsJson", "a"."Name", "a"."ParamsJson", "a"."Provider", "a"."Temperature", "a"."TemplateRef", "a"."TokenBudget", "a"."ToolBudget", "a"."TopP", "a"."UpdatedUtc"
+FROM "Agents" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+2025-08-31 21:44:33.587 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__agentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AgentId", "a"."ConfigJson", "a"."Enabled", "a"."ToolId"
+FROM "AgentToolBindings" AS "a"
+WHERE "a"."AgentId" = @__agentId_0
+2025-08-31 21:44:33.593 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:44:33.600 +02:00 [INF] Setting HTTP status code 200.
+2025-08-31 21:44:33.606 +02:00 [INF] Writing value of type 'AgentResponse' as Json.
+2025-08-31 21:44:33.613 +02:00 [INF] Writing value of type 'List`1' as Json.
+2025-08-31 21:44:33.619 +02:00 [INF] Executed endpoint 'HTTP: GET /agents/{id:guid}'
+2025-08-31 21:44:33.624 +02:00 [INF] Executed endpoint 'HTTP: GET /agents/{id:guid}/bindings'
+2025-08-31 21:44:33.630 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865 - 200 null application/json; charset=utf-8 84.6167ms
+2025-08-31 21:44:33.635 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/agents/1e5ffb9e-fb28-4405-b82b-b4647aa5a865/bindings - 200 null application/json; charset=utf-8 82.9191ms
+2025-08-31 21:44:38.285 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/sessions - null null
+2025-08-31 21:44:38.297 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:38.307 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/sessions - 204 null null 21.6547ms
+2025-08-31 21:44:38.321 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5088/sessions - application/json 50
+2025-08-31 21:44:38.329 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:38.338 +02:00 [INF] Executing endpoint 'HTTP: POST /sessions/'
+2025-08-31 21:44:38.357 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."Autonomy", "a"."CreatedUtc", "a"."GuardrailsJson", "a"."Name", "a"."ParamsJson", "a"."Provider", "a"."Temperature", "a"."TemplateRef", "a"."TokenBudget", "a"."ToolBudget", "a"."TopP", "a"."UpdatedUtc"
+FROM "Agents" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+2025-08-31 21:44:38.441 +02:00 [INF] Executed DbCommand (23ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?' (DbType = Int32), @p4='?' (DbType = DateTime), @p5='?' (Size = 7), @p6='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Sessions" ("Id", "AgentId", "EndedUtc", "LastEventIdx", "StartedUtc", "Status", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2025-08-31 21:44:38.453 +02:00 [INF] Setting HTTP status code 201.
+2025-08-31 21:44:38.459 +02:00 [INF] Writing value of type 'SessionCreatedResponse' as Json.
+2025-08-31 21:44:38.466 +02:00 [INF] Executed endpoint 'HTTP: POST /sessions/'
+2025-08-31 21:44:38.471 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5088/sessions - 201 null application/json; charset=utf-8 149.9746ms
+2025-08-31 21:44:38.494 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/hubs/trace/negotiate?negotiateVersion=1 - null null
+2025-08-31 21:44:38.500 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:38.506 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/hubs/trace/negotiate?negotiateVersion=1 - 204 null null 12.5242ms
+2025-08-31 21:44:38.509 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5088/hubs/trace/negotiate?negotiateVersion=1 - null 0
+2025-08-31 21:44:38.520 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:38.525 +02:00 [INF] ApiKey was not authenticated. Failure message: Missing API key
+2025-08-31 21:44:38.530 +02:00 [INF] Executing endpoint '/hubs/trace/negotiate'
+2025-08-31 21:44:38.540 +02:00 [INF] Executed endpoint '/hubs/trace/negotiate'
+2025-08-31 21:44:38.546 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5088/hubs/trace/negotiate?negotiateVersion=1 - 200 316 application/json 37.506ms
+2025-08-31 21:44:38.551 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5088/hubs/trace?id=ry8zUQRqeAyMolcr4vg7dg - null null
+2025-08-31 21:44:38.557 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:38.563 +02:00 [INF] ApiKey was not authenticated. Failure message: Missing API key
+2025-08-31 21:44:38.567 +02:00 [INF] Executing endpoint '/hubs/trace'
+2025-08-31 21:44:45.312 +02:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5088/sessions/29b1d22a-1c5e-4bcd-9cf2-c01a6ee5ff01/messages - null null
+2025-08-31 21:44:45.323 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:45.330 +02:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5088/sessions/29b1d22a-1c5e-4bcd-9cf2-c01a6ee5ff01/messages - 204 null null 18.439ms
+2025-08-31 21:44:45.339 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5088/sessions/29b1d22a-1c5e-4bcd-9cf2-c01a6ee5ff01/messages - application/json 40
+2025-08-31 21:44:45.349 +02:00 [INF] CORS policy execution successful.
+2025-08-31 21:44:45.359 +02:00 [INF] Executing endpoint 'HTTP: POST /sessions/{id:guid}/messages'
+2025-08-31 21:44:45.383 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "s"."Id", "s"."AgentId", "s"."EndedUtc", "s"."LastEventIdx", "s"."StartedUtc", "s"."Status", "s"."UserId"
+FROM "Sessions" AS "s"
+WHERE "s"."Id" = @__p_0
+LIMIT 1
+2025-08-31 21:44:45.435 +02:00 [INF] Executed DbCommand (20ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 26), @p2='?' (DbType = DateTime), @p3='?' (Size = 4), @p4='?' (DbType = Guid), @p5='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Messages" ("Id", "Content", "CreatedUtc", "Role", "SessionId", "TokenUsageJson")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-08-31 21:44:45.459 +02:00 [INF] Setting HTTP status code 202.
+2025-08-31 21:44:45.465 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."Autonomy", "a"."CreatedUtc", "a"."GuardrailsJson", "a"."Name", "a"."ParamsJson", "a"."Provider", "a"."Temperature", "a"."TemplateRef", "a"."TokenBudget", "a"."ToolBudget", "a"."TopP", "a"."UpdatedUtc"
+FROM "Agents" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+2025-08-31 21:44:45.472 +02:00 [INF] Writing value of type 'AcceptedResponse' as Json.
+2025-08-31 21:44:45.484 +02:00 [INF] Executed endpoint 'HTTP: POST /sessions/{id:guid}/messages'
+2025-08-31 21:44:45.490 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5088/sessions/29b1d22a-1c5e-4bcd-9cf2-c01a6ee5ff01/messages - 202 null application/json; charset=utf-8 151.4385ms
+2025-08-31 21:44:46.114 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__agentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AgentId", "a"."ConfigJson", "a"."Enabled", "a"."ToolId", "t"."Id", "t"."Description", "t"."Enabled", "t"."InputSchemaJson", "t"."McpServerId", "t"."Name", "t"."Scope", "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "AgentToolBindings" AS "a"
+INNER JOIN "Tools" AS "t" ON "a"."ToolId" = "t"."Id"
+INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
+WHERE "a"."AgentId" = @__agentId_0 AND "a"."Enabled"
+2025-08-31 21:44:46.668 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__agentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AgentId", "a"."ConfigJson", "a"."Enabled", "a"."ToolId", "t"."Id", "t"."Description", "t"."Enabled", "t"."InputSchemaJson", "t"."McpServerId", "t"."Name", "t"."Scope", "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "AgentToolBindings" AS "a"
+INNER JOIN "Tools" AS "t" ON "a"."ToolId" = "t"."Id"
+INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
+WHERE "a"."AgentId" = @__agentId_0 AND "a"."Enabled"
+2025-08-31 21:44:47.635 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__agentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AgentId", "a"."ConfigJson", "a"."Enabled", "a"."ToolId", "t"."Id", "t"."Description", "t"."Enabled", "t"."InputSchemaJson", "t"."McpServerId", "t"."Name", "t"."Scope", "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "AgentToolBindings" AS "a"
+INNER JOIN "Tools" AS "t" ON "a"."ToolId" = "t"."Id"
+INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
+WHERE "a"."AgentId" = @__agentId_0 AND "a"."Enabled"
+2025-08-31 21:44:47.649 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__agentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AgentId", "a"."ConfigJson", "a"."Enabled", "a"."ToolId", "t"."Id", "t"."Description", "t"."Enabled", "t"."InputSchemaJson", "t"."McpServerId", "t"."Name", "t"."Scope", "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "AgentToolBindings" AS "a"
+INNER JOIN "Tools" AS "t" ON "a"."ToolId" = "t"."Id"
+INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
+WHERE "a"."AgentId" = @__agentId_0 AND "a"."Enabled"
+2025-08-31 21:44:48.363 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "McpServers" AS "m"
+ORDER BY "m"."LastSeenUtc"
+2025-08-31 21:44:48.375 +02:00 [INF] Conectando a MCP WebSocket: ws://localhost:8970/ws
+2025-08-31 21:44:48.582 +02:00 [ERR] Error inesperado en WebSocket: MCP Tool error: No se encontró el archivo de herramienta: ../../bundles\kb-tools\tools/summarize.js
+2025-08-31 21:44:48.615 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__agentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AgentId", "a"."ConfigJson", "a"."Enabled", "a"."ToolId", "t"."Id", "t"."Description", "t"."Enabled", "t"."InputSchemaJson", "t"."McpServerId", "t"."Name", "t"."Scope", "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "AgentToolBindings" AS "a"
+INNER JOIN "Tools" AS "t" ON "a"."ToolId" = "t"."Id"
+INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
+WHERE "a"."AgentId" = @__agentId_0 AND "a"."Enabled"
+2025-08-31 21:44:48.631 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__agentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AgentId", "a"."ConfigJson", "a"."Enabled", "a"."ToolId", "t"."Id", "t"."Description", "t"."Enabled", "t"."InputSchemaJson", "t"."McpServerId", "t"."Name", "t"."Scope", "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "AgentToolBindings" AS "a"
+INNER JOIN "Tools" AS "t" ON "a"."ToolId" = "t"."Id"
+INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
+WHERE "a"."AgentId" = @__agentId_0 AND "a"."Enabled"
+2025-08-31 21:44:49.151 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "McpServers" AS "m"
+ORDER BY "m"."LastSeenUtc"
+2025-08-31 21:44:49.157 +02:00 [INF] Conectando a MCP WebSocket: ws://localhost:8970/ws
+2025-08-31 21:44:49.401 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__agentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AgentId", "a"."ConfigJson", "a"."Enabled", "a"."ToolId", "t"."Id", "t"."Description", "t"."Enabled", "t"."InputSchemaJson", "t"."McpServerId", "t"."Name", "t"."Scope", "m"."Id", "m"."AuthType", "m"."BaseUrl", "m"."LastSeenUtc", "m"."MetadataJson", "m"."Name", "m"."Status"
+FROM "AgentToolBindings" AS "a"
+INNER JOIN "Tools" AS "t" ON "a"."ToolId" = "t"."Id"
+INNER JOIN "McpServers" AS "m" ON "t"."McpServerId" = "m"."Id"
+WHERE "a"."AgentId" = @__agentId_0 AND "a"."Enabled"
+2025-08-31 21:44:52.862 +02:00 [INF] Executed DbCommand (19ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 1552), @p2='?' (DbType = DateTime), @p3='?' (Size = 9), @p4='?' (DbType = Guid), @p5='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Messages" ("Id", "Content", "CreatedUtc", "Role", "SessionId", "TokenUsageJson")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-08-31 21:45:50.407 +02:00 [INF] Executed endpoint '/hubs/trace'
+2025-08-31 21:45:50.418 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5088/hubs/trace?id=ry8zUQRqeAyMolcr4vg7dg - 101 null null 71866.1995ms

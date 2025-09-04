@@ -30,7 +30,7 @@ public class AgentsService : IAgentsService
         {
             Id = Guid.NewGuid(),
             Name = request.Name,
-            Provider = "openai", // Default provider
+            Provider = "azureopenai", // Default provider - asegurar que sea azureopenai
             Autonomy = request.Autonomy,
             ParamsJson = request.SystemPrompt, // Store system prompt in params
             CreatedUtc = DateTime.UtcNow,
@@ -40,7 +40,7 @@ public class AgentsService : IAgentsService
         _context.Agents.Add(agent);
         await _context.SaveChangesAsync();
 
-        return new AgentResponse(agent.Id, agent.Name, agent.ParamsJson, agent.ParamsJson ?? "", agent.Autonomy, agent.CreatedUtc);
+        return new AgentResponse(agent.Id, agent.Name, agent.ParamsJson, agent.ParamsJson ?? "", agent.Autonomy, agent.CreatedUtc, agent.Provider);
     }
 
     public async Task<IReadOnlyList<AgentResponse>> GetAgentsAsync()
@@ -49,7 +49,7 @@ public class AgentsService : IAgentsService
             .OrderBy(a => a.CreatedUtc)
             .ToListAsync();
 
-        return agents.Select(a => new AgentResponse(a.Id, a.Name, a.ParamsJson, a.ParamsJson ?? "", a.Autonomy, a.CreatedUtc)).ToList();
+        return agents.Select(a => new AgentResponse(a.Id, a.Name, a.ParamsJson, a.ParamsJson ?? "", a.Autonomy, a.CreatedUtc, a.Provider)).ToList();
     }
 
     public async Task<AgentResponse?> GetAgentAsync(Guid id)
@@ -57,7 +57,7 @@ public class AgentsService : IAgentsService
         var agent = await _context.Agents.FindAsync(id);
         if (agent == null) return null;
 
-        return new AgentResponse(agent.Id, agent.Name, agent.ParamsJson, agent.ParamsJson ?? "", agent.Autonomy, agent.CreatedUtc);
+        return new AgentResponse(agent.Id, agent.Name, agent.ParamsJson, agent.ParamsJson ?? "", agent.Autonomy, agent.CreatedUtc, agent.Provider);
     }
 
     public async Task<AgentResponse> UpdateAgentAsync(Guid id, UpdateAgentRequest request)
@@ -73,7 +73,7 @@ public class AgentsService : IAgentsService
 
         await _context.SaveChangesAsync();
 
-        return new AgentResponse(agent.Id, agent.Name, agent.ParamsJson, agent.ParamsJson ?? "", agent.Autonomy, agent.CreatedUtc);
+        return new AgentResponse(agent.Id, agent.Name, agent.ParamsJson, agent.ParamsJson ?? "", agent.Autonomy, agent.CreatedUtc, agent.Provider);
     }
 
     public async Task<BindingResponse> CreateBindingAsync(Guid agentId, CreateBindingRequest request)

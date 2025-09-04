@@ -44,10 +44,11 @@ Content-Type: application/json
 x-api-key: {{apiKey}}
 
 {
-  "name": "Test Agent",
+  "name": "Test Agent Azure OpenAI 3",
   "description": "Agente de prueba con herramientas MCP",
   "systemPrompt": "Eres un asistente útil que puede usar herramientas MCP.",
-  "autonomy": "Supervised"
+  "autonomy": "Supervised",
+  "provider": "azureopenai"
 }
 
 ### 8. Obtener Agentes
