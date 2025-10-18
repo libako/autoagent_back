@@ -437,7 +437,7 @@ public class KernelFactory : IKernelFactory
     /// <summary>
     /// Invalidar cache de un agente específico
     /// </summary>
-    public void InvalidateAgent(Guid agentId)
+    /*public void InvalidateAgent(Guid agentId)
     {
         try
         {
@@ -455,16 +455,16 @@ public class KernelFactory : IKernelFactory
         {
             // Ignorar errores de invalidación
         }
-    }
+    }*/
     
     /// <summary>
     /// Limpiar todo el cache
     /// </summary>
-    public void ClearCache()
+    /*public void ClearCache()
     {
         _kernelCache.Clear();
         _cacheMetadata.Clear();
-    }
+    }*/
 
     // Método para crear kernels especializados que reutilicen la configuración
     public async Task<Kernel> CreateSpecializedKernelAsync(string purpose, AutoAgentes.Domain.Entities.Agent agent, Guid sessionId, CancellationToken ct)

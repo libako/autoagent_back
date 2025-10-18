@@ -472,7 +472,7 @@ Eres un experto en construir argumentos para herramientas MCP basándote en su e
                 Id = Guid.Empty, 
                 Name = "ArgumentBuilder",
                 Provider = sysProvider,
-                Model = sysModel,
+                //Model = sysModel,
                 Autonomy = "Supervised"
             }, sessionId, ct, minimalKernel: true);
             
@@ -551,7 +551,7 @@ Eres un asistente experto en procesar respuestas de herramientas MCP.
                 Id = Guid.Empty, 
                 Name = "ResponseProcessor",
                 Provider = sysProvider,
-                Model = sysModel,
+                //Model = sysModel,
                 Autonomy = "Supervised"
             }, sessionId, ct, minimalKernel: true);
             
