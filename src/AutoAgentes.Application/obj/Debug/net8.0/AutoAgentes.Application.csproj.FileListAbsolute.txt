@@ -1,0 +1,6 @@
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Application\obj\Debug\net8.0\AutoAgentes.Application.csproj.AssemblyReference.cache
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Application\obj\Debug\net8.0\AutoAgentes.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Application\obj\Debug\net8.0\AutoAgentes.Application.AssemblyInfoInputs.cache
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Application\obj\Debug\net8.0\AutoAgentes.Application.AssemblyInfo.cs
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Application\obj\Debug\net8.0\AutoAgentes.Application.csproj.CoreCompileInputs.cache
+D:\BearDevelopment\AutoAgent\autoagent_back\src\AutoAgentes.Application\obj\Debug\net8.0\AutoAgentes.Application.sourcelink.json

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoAgentes.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using AutoAgentes.App.Constants;
 
 namespace AutoAgentes.App;
 
@@ -372,11 +373,8 @@ private int GetMaxTokensForAutonomy(string autonomy)
 
     private string ResolveTemplateInString(string input, Dictionary<string, object> workingMemory)
     {
-        // Buscar plantillas como "${key}" o "${key.subkey}"
-        var result = input;
-        var regex = new System.Text.RegularExpressions.Regex(@"\$\{([^}]+)\}");
-        
-        result = regex.Replace(result, match =>
+        // Usar regex compilada para mejor rendimiento
+        return Regexes.Template.Replace(input, match =>
         {
             var key = match.Groups[1].Value;
             
@@ -389,8 +387,6 @@ private int GetMaxTokensForAutonomy(string autonomy)
             // Si no se encuentra, mantener la plantilla original
             return match.Value;
         });
-        
-        return result;
     }
 
     private string SafeSlice(string input, int maxLength)
@@ -576,9 +572,9 @@ Eres un asistente experto en procesar respuestas de herramientas MCP.
     /// </summary>
     private bool MissingRequiredArgs(string? schemaJson, Dictionary<string, object> args)
     {
-        // Sin schema: solo consideramos que faltan si NO hay args
+        // Sin schema: no fuerces LLM si hay args
         if (string.IsNullOrEmpty(schemaJson))
-            return args == null || args.Count == 0;
+            return false;
 
         try
         {
@@ -597,12 +593,19 @@ Eres un asistente experto en procesar respuestas de herramientas MCP.
         catch
         {
             // Si el schema es inválido, no fuerces fill si ya hay args
-            return args == null || args.Count == 0;
+            return false;
         }
     }
     
     /// <summary>
     /// Obtener timeout configurado para una sección específica
     /// </summary>
-    private int DefaultTimeout(string section) => _configuration.GetValue<int>($"Timeouts:{section}Seconds", 30);
+    private int DefaultTimeout(string section) => section.ToLowerInvariant() switch
+    {
+        "mcptool" => _configuration.GetValue<int>("Timeouts:MCPToolSeconds", 30),
+        "sktool" => _configuration.GetValue<int>("Timeouts:SKToolSeconds", 30),
+        "planner" => _configuration.GetValue<int>("Timeouts:PlannerSeconds", 60),
+        "summary" => _configuration.GetValue<int>("Timeouts:SummarySeconds", 45),
+        _ => 30
+    };
 }

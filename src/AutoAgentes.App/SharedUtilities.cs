@@ -1,3 +1,5 @@
+using AutoAgentes.App.Constants;
+
 namespace AutoAgentes.App;
 
 /// <summary>
@@ -18,8 +20,8 @@ internal static class SharedUtilities
         // Reemplazar puntos con guiones bajos
         var sanitized = input.Replace(".", "_");
         
-        // Remover caracteres especiales excepto guiones bajos
-        sanitized = System.Text.RegularExpressions.Regex.Replace(sanitized, @"[^a-zA-Z0-9_]", "");
+        // Usar regex compilada para mejor rendimiento
+        sanitized = Regexes.FunctionNameCleaner.Replace(sanitized, "");
         
         // Convertir a minúsculas
         sanitized = sanitized.ToLowerInvariant();

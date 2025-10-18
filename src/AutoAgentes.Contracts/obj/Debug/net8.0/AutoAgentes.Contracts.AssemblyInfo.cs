@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AutoAgentes.Contracts")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fb209336831ba8d23b98de176db019ffa0f2592")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af041810b2417cd73a6b28e9957e76ce34041138")]
 [assembly: System.Reflection.AssemblyProductAttribute("AutoAgentes.Contracts")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AutoAgentes.Contracts")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

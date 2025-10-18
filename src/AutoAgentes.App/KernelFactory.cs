@@ -386,7 +386,14 @@ public class KernelFactory : IKernelFactory
     /// <summary>
     /// Obtener timeout configurado para una sección específica
     /// </summary>
-    private int DefaultTimeout(string section) => _configuration.GetValue<int>($"Timeouts:{section}Seconds", 30);
+    private int DefaultTimeout(string section) => section.ToLowerInvariant() switch
+    {
+        "mcptool" => _configuration.GetValue<int>("Timeouts:MCPToolSeconds", 30),
+        "sktool" => _configuration.GetValue<int>("Timeouts:SKToolSeconds", 30),
+        "planner" => _configuration.GetValue<int>("Timeouts:PlannerSeconds", 60),
+        "summary" => _configuration.GetValue<int>("Timeouts:SummarySeconds", 45),
+        _ => 30
+    };
     
     /// <summary>
     /// Limpiar cache expirado y mantener tamaño máximo
@@ -502,7 +509,14 @@ public static class KernelMcpExtensions
     /// <summary>
     /// Obtener timeout configurado para una sección específica
     /// </summary>
-    private static int DefaultTimeout(string section) => 30; // Fallback por ahora
+    private static int DefaultTimeout(string section) => section.ToLowerInvariant() switch
+    {
+        "mcptool" => 30,
+        "sktool" => 30,
+        "planner" => 60,
+        "summary" => 45,
+        _ => 30
+    };
     
     /// <summary>
     /// Construir parámetros SK desde JSON Schema
@@ -928,16 +942,15 @@ public static class Governance
         };
 
         // Aplicar filtros de seguridad usando eventos legacy (compatible con SK 1.64.0)
-        if (securityLevel == "high")
+        if (securityLevel.Equals("high", StringComparison.OrdinalIgnoreCase))
         {
             kernel.FunctionInvoking += (sender, args) =>
             {
-                // Validar que no se ejecuten funciones peligrosas
-                var functionName = args.Function.Name.ToLowerInvariant();
-                var dangerousFunctions = new[] { "delete", "remove", "wipe", "destroy", "drop", "truncate" };
+                // Validar que no se ejecuten funciones peligrosas usando patrones regex
+                var functionName = args.Function.Name;
+                var dangerousPatterns = new[] { "^delete($|_)", "^remove($|_)", "^wipe($|_)", "^destroy($|_)", "^drop($|_)", "^truncate($|_)" };
                 
-                if (dangerousFunctions.Any(dangerous => functionName.Equals(dangerous, StringComparison.OrdinalIgnoreCase) ||
-                                                       functionName.StartsWith(dangerous + "_", StringComparison.OrdinalIgnoreCase)))
+                if (dangerousPatterns.Any(pattern => System.Text.RegularExpressions.Regex.IsMatch(functionName, pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase)))
                 {
                     args.Cancel = true;
                     // Nota: args.Reason no está disponible en esta versión de SK
